@@ -1,0 +1,213 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Journal Article
+% LaTeX Template
+% Version 1.4 (15/5/16)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com) with extensive modifications by
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[onecolumn]{article}
+
+\usepackage{blindtext} % Package to generate dummy text throughout this template 
+\usepackage{graphicx}
+\usepackage[sc]{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\linespread{1.05} % Line spacing - Palatino needs more space between lines
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage{placeins}
+\usepackage[english]{babel} % Language hyphenation and typographical rules
+
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry} % Document margins
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+
+\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+
+\usepackage{enumitem} % Customized lists
+\setlist[itemize]{noitemsep} % Make itemize lists more compact
+
+\usepackage{abstract} % Allows abstract customization
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+
+\usepackage{titlesec} % Allows customization of titles
+\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
+\renewcommand\thesubsection{\roman{subsection}} % roman numerals for subsections
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+
+\usepackage{fancyhdr} % Headers and footers
+\pagestyle{fancy} % All pages have headers and footers
+\fancyhead{} % Blank out the default header
+\fancyfoot{} % Blank out the default footer
+\fancyhead[C]{$\bullet$ Marzo 2022 $\bullet$ TP N° 1} % Custom header text
+\fancyfoot[R]{\thepage} % Custom footer text
+
+\usepackage{titling} % Customizing the title section
+
+\usepackage{hyperref} % For hyperlinks in the PDF
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\setlength{\droptitle}{-4\baselineskip} % Move the title up
+
+\pretitle{\begin{center}\Huge\bfseries} % Article title formatting
+\posttitle{\end{center}} % Article title closing formatting
+\title{TP 1.1 Simulacion de una Ruleta} % Article title
+\author{%
+\textbf{Juan I. Torres} \\[0.5ex] % profesor name
+\normalsize Catedra de Simulacion \\ % MATERIA
+\normalsize UTN FRRO \\ % Your institution
+\normalsize Zeballos 1341, S2000 \\ % Your institu
+% \normalsize orkuan@gmail.com \\[3ex]% mail profe
+\normalsize Marzo 22, 2022 \\[1.5ex] % fecha entrega
+\textbf{Integrantes:} \\  
+\normalsize 1-Fadua Dora Sicardi \\
+\normalsize 2-Franco Giangiordano \\
+\normalsize 3-Gonzalo Turconi \\
+\normalsize 4-Ignacio Curti\\
+}
+\date{}
+\renewcommand{\maketitlehookd}{%
+\begin{abstract}
+\noindent\normalsize\normalfont El siguiente documento tiene por objetivo detallar el trabajo de clase que debe realizarse como introduccion a la materia simulacion. El mismo consiste en un modelo simple de una ruleta. % Dummy abstract text - replace \blindtext with your abstract text
+\end{abstract}
+}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+% Print the title
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\section{Introduccion}
+
+\normalsize La ruleta es un juego de azar típico de los casinos, cuyo nombre viene del término francés roulette, que significan "ruedita" o "rueda pequeña". Su uso como elemento de juego de azar, aún en configuraciones distintas de la actual, no está documentado hasta bien entrada la Edad Media. Es de suponer que su referencia más antigua es la llamada Rueda de la Fortuna, de la que hay noticias a lo largo de toda la historia, prácticamente en todos los campos del saber humano.\\[2ex]
+\normalsize La “magia” del movimiento de las ruedas tuvo que impactar a todas las generaciones. La aparente quietud del centro, el aumento de velocidad conforme nos alejamos de él, la posibilidad de que se detenga en un punto al azar; todo esto tuvo que influir en el desarrollo de distintos juegos que tienen la rueda como base.\\[2ex]
+\normalsize Las ruedas, y por extensión las ruletas, siempre han tenido conexión con el mundo mágico y esotérico. Así, una de ellas forma parte del tarot, más precisamente de los que se conocen como arcanos mayores.\\[2ex]
+\normalsize Según los indicios, la creación de una ruleta y sus normas de juego, muy similares a las que conocemos hoy en día, se debe a Blaise Pascal, matemático francés, quien ideó una ruleta con treinta y seis números (sin el cero), en la que se halla un extremado equilibrio en la posición en que está colocado cada número. La elección de 36 números da un alcance aún más vinculado a la magia (la suma de los primeros 36 números da el número mágico por excelencia: seiscientos sesenta y seis).\\[2ex]
+\normalsize Esta ruleta podía usarse como entretenimiento en círculos de amistades. Sin embargo, a nivel de empresa que pone los medios y el personal para el entretenimiento de sus clientes, no era rentable, ya que estadísticamente todo lo que se apostaba se repartía en premios (probabilidad de 1/36 de acertar el número y ganar 36 veces lo apostado).\\[2ex]
+\normalsize En 1842, los hermanos Blanc modificaron la ruleta añadiéndole un nuevo número, el 0, y la introdujeron inicialmente en el Casino de Montecarlo. Ésta es la ruleta que se conoce hoy en día, con una probabilidad de acertar de 1/37 y ganar 36 veces lo apostado, consiguiendo un margen para la casa del 2,7\% (1/37).\\[2ex]
+
+
+
+\section{Descripcion del trabajo}
+
+El trabajo consiste en construir un programa en lenguaje Python que simule el funcionamiento  del plato de una ruleta. Para esto se debe tener en cuenta los siguientes temas a investigar:
+\begin{itemize}
+\item Generacion de valores aleatorios enteros.
+\item Uso de listas para el almacenamiento de datos.
+\item Uso de la estructura de control \textbf{FOR} para iterar las listas.
+\item Empleo de funciones estadisticas.
+\item Graficas de los resultados mediante el paquete Matplotlib.
+\end{itemize}
+
+\subsection{Exposicion de los resultados y analisis de los mismos}
+\normalsize Los resultados se deben graficar y luego concluir su comportamiento simulado y esperado. A modo de ejemplo se dejan los siguientes bocetos de gráficas, siendo estas, que al menos deben de estar en el estudio: \\[2ex]
+
+%ACA VAN LAS IMAGENES O SEA LAS GRAFICAS 
+%\includegraphics[scale=0.]{foca.jpg}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[scale=0.5]{frec_rel.png}
+  \caption{Frecuencia Relativa de la 1er corrida} 
+  \label{fig: imagen1}
+\end{figure}
+\FloatBarrier
+\begin{figure}[h!]
+  \centering
+  \includegraphics[scale=0.5]{prome.png}
+  \caption{Promedio de la 1er corrida}
+  \label{fig: imagen2}
+\end{figure}
+\FloatBarrier
+\begin{figure}[h!]
+  \centering
+  \includegraphics[scale=0.5]{desvios.png}
+  \caption{Desvio Estandar de la 1er corrida} 
+  \label{fig: imagen3}
+\end{figure}
+\FloatBarrier
+\begin{figure}[h!]
+  \centering
+  \includegraphics[scale=0.5]{vaciancias CORRECTA.png}
+  \caption{Variancia de la 1er corrida} 
+  \label{fig: imagen4}
+\end{figure}
+\FloatBarrier
+\begin{figure}[h!]
+  \centering
+  \includegraphics[scale=0.5]{frec_rel_total.png}
+  \caption{Frecuencia Relativa de todas las corridas} 
+  \label{fig: imagen5}
+\end{figure}
+\FloatBarrier
+\begin{figure}[h!]
+  \centering
+  \includegraphics[scale=0.5]{prome_total.png}
+  \caption{Promedio de todas las corridas} 
+  \label{fig: imagen6}
+\end{figure}
+\FloatBarrier
+\begin{figure}[h!]
+  \centering
+  \includegraphics[scale=0.5]{desvios_total.png}
+  \caption{Desvio Estandar de todas las corridas} 
+  \label{fig: imagen7}
+\end{figure}
+\FloatBarrier
+\begin{figure}[h!]
+  \centering
+  \includegraphics[scale=0.5]{vaciancias_total.png}
+  \caption{Variancia de todas las corridas} 
+  \label{fig: imagen8}
+\end{figure}
+\FloatBarrier
+
+
+\normalsize Luego de finalizar lo anterior, se deben de realizar varias corridas del experimento (entre 5 y 10) y generar nuevas gráficas donde se muestren en forma simultáneamente sus resultados. En total son como mínimo 8 gráficas en todo el trabajo. 
+\subsection{Presentacion del trabajo y entrega}
+\normalsize Este y los siguientes TPs se presenta obligatoriamente en formato LATEX. Una manera cómoda de trabajar es mediante un IDE el cual puede ser online o local. La ventaja de trabajar online es la posibilidad de que el resto del grupo aporte y corrija directamente y simultáneamente.\\[2ex]
+\normalsize Una de las plataformas online más conocidas es Overleaf. Por el otro lado, en forma local tenemos, para los que trabajan con Linux distribución Ubuntu el muy conocido Texmaker. En Windows debe instalarse primero el compilador Miktex, y posteriormente puede instalarse Texmaker o TexStudio. VSCode también tiene utilidades para escribir en Latex.\\[2ex]
+\normalsize El contenido mínimo a entregar es:\\[2ex]
+\begin{itemize}
+  \item Codigo completo en Python
+  \item Informe en formato Latex con introducción, gráficas, fórmulas empleadas, conclusiones, referencias (hay un apartado para esto) y cualquier otra información que quieran agregar.
+  \end{itemize}
+
+
+%----------------------------------------------------------------------------------------
+%	REFERENCE LIST
+%----------------------------------------------------------------------------------------
+
+\begin{thebibliography}{99} % Bibliography - this is intentionally simple in this template
+
+\normalsize \href{https://python-para-impacientes.blogspot.com/2014/08/graficos-en-ipython.html}{https://python-para-impacientes.blogspot.com/2014/08/graficos-en-ipython.html}\\
+\normalsize \href{https://relopezbriega.github.io/blog/2015/06/27/probabilidad-y-estadistica-con-python/}{https://relopezbriega.github.io/blog/2015/06/27/probabilidad-y-estadistica-con-python/} \\
+\normalsize \href{https://es.wikipedia.org/wiki/Ruleta}{https://es.wikipedia.org/wiki/Ruleta} \\
+ 
+\end{thebibliography}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
