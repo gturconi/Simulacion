@@ -78,16 +78,17 @@ if __name__ == "__main__":
         return caja, apuesta, aciertos
 
     
-    frecs_total_fibo = []
-    flujoCaja_fibo = []
-    frecs_total_martin = []
-    flujoCaja_martin = []
-    frecs_total_dalem = []
-    flujoCaja_dalem = []
     valoresCaja = [50, 8193]
-    funciones = [fibonacci, martingala, dalembert]
-    
     for cajaInicial in valoresCaja:
+
+        frecs_total_fibo = []
+        flujoCaja_fibo = []
+        frecs_total_martin = []
+        flujoCaja_martin = []
+        frecs_total_dalem = []
+        flujoCaja_dalem = []
+        funciones = [fibonacci, martingala, dalembert]
+    
         for funcion in funciones:
             for i in range(5):
                 variables = (cajaInicial, 1, 0)
@@ -125,11 +126,10 @@ if __name__ == "__main__":
                 else:
                     flujoCaja_dalem.append(flujoCaja[j - 1])
                     frecs_total_dalem.append(frecs_corridas[j - 1])
-
         graficar(flujoCaja_fibo, constante(cajaInicial, 5), "n(numero de tiradas)", "cc(cantidad de capital)","Flujo de caja Fibonacci de cada corrida")
         graficar2(frecs_total_fibo, "fr(frecuencia relativa)", "Frecuencia relativa de aciertos Fibonacci de cada corrida")
-        graficar(flujoCaja_martin, constante(cajaInicial,5), "n(numero de tiradas)", "cc(cantidad de capital)","Flujo de caja Martingala de cada corrida")
+        graficar(flujoCaja_martin, constante(cajaInicial, 5), "n(numero de tiradas)", "cc(cantidad de capital)","Flujo de caja Martingala de cada corrida")
         graficar2(frecs_total_martin,"fr(frecuencia relativa)" ,"Frecuencia relativa de aciertos Martingala de cada corrida")
-        graficar(flujoCaja_dalem, constante(cajaInicial,5), "n(numero de tiradas)", "cc(cantidad de capital)","Flujo de caja Dalembert de cada corrida")
+        graficar(flujoCaja_dalem, constante(cajaInicial, 5), "n(numero de tiradas)", "cc(cantidad de capital)","Flujo de caja Dalembert de cada corrida")
         graficar2(frecs_total_dalem,"fr(frecuencia relativa)" ,"Frecuencia relativa de aciertos Dalembert de cada corrida")
 
