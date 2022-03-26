@@ -71,9 +71,14 @@ if __name__ == "__main__":
             serie = [0, 1]
         return caja, serie[1], aciertos
 
-    cte_caja = constante(50, 20)
+
+
+
+    frecs_total_fibo = []
+    flujoCaja_fibo = []
 
     funciones = [fibonacci, martingala]
+for i in range(5):
     for funcion in funciones:
         variables = (50,1,0)
         numerosTirada = []
@@ -89,7 +94,14 @@ if __name__ == "__main__":
             print("Tirada número: ", funcion, "Valor: ", tirada, "Caja: ", variables[0],"Apuesta:", variables[1] ,"Aciertos: ",variables[2], "Apuesta número", j + 1)
             frecs_corridas.append(variables[2]/(j+1))
             j = j + 1
-        #graficar(flujoCaja, cte_caja, "n(numero de tiradas)", "cc(cantidad de capital)")
-        cte_caja = constante(50, len(flujoCaja))
-        #graficar(flujoCaja, cte_caja, "n(numero de tiradas)", "cc(cantidad de capital)")
-        graficar2(frecs_corridas,"fr(frecuencia relativa)" ,"n(numero de tiradas)")
+        if (i == 1):
+           # graficar(flujoCaja, cte_caja, "n(numero de tiradas)", "cc(cantidad de capital)")
+            cte_caja = constante(50, len(flujoCaja))
+           # graficar(flujoCaja, cte_caja, "n(numero de tiradas)", "cc(cantidad de capital)")
+           # graficar2(frecs_corridas,"fr(frecuencia relativa)" ,"n(numero de tiradas)")
+        if(funcion == fibonacci):
+            flujoCaja_fibo.append(flujoCaja[j - 1])
+            frecs_total_fibo.append(frecs_corridas[j - 1])
+
+graficar(flujoCaja_fibo, constante(50,5), "n(numero de tiradas)", "cc(cantidad de capital)")
+graficar2(frecs_total_fibo,"fr(frecuencia relativa)" ,"n(numero de tiradas)")
