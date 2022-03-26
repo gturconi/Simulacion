@@ -67,7 +67,7 @@ if __name__ == "__main__":
             numerosTirada.append(tirada)
             variables = funcion(tirada, variables[0], variables[1],variables[2])
             flujoCaja.append(variables[0])
-            print("Tirada número: ", funcion, "Valor: ", tirada, "Caja: ", variables[0],"Apuesta:", variables[1] ,"Aciertos: ",variables[2], "apuesta numero", j + 1)
+            print("Tirada número: ", funcion, "Valor: ", tirada, "Caja: ", variables[0],"Apuesta:", variables[1] ,"Aciertos: ",variables[2], "Apuesta número", j + 1)
             frecs_corridas.append(variables[2]/(j+1))
             j = j + 1
         graficar(flujoCaja, cte_caja, "n(numero de tiradas)", "cc(cantidad de capital)")
