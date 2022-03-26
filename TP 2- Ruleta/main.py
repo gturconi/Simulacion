@@ -70,14 +70,25 @@ if __name__ == "__main__":
             caja = caja - apuesta
             serie = [0, 1]
         return caja, serie[1], aciertos
-
+    
+    
+    def dalembert(valor, caja, apuesta, aciertos):
+        if valor in negros:
+            caja = caja + apuesta
+            aciertos = aciertos + 1
+            if (apuesta > 1):
+                apuesta = apuesta - 1
+        else: 
+            caja = caja - apuesta
+            apuesta = apuesta + 1
+        return caja, apuesta, aciertos
 
 
 
     frecs_total_fibo = []
     flujoCaja_fibo = []
 
-    funciones = [fibonacci, martingala]
+    funciones = [fibonacci, martingala, dalembert]
 for i in range(5):
     for funcion in funciones:
         variables = (50,1,0)
