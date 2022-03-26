@@ -36,7 +36,11 @@ if __name__ == "__main__":
         length = len(list)
         y_pos = np.arange(length)
         plt.bar(y_pos, list, color="b", width = 0.25)
-        plt.xticks(y_pos, list)
+
+        list2 = []
+        for i in range(length):
+            list2.append(i+1)
+        plt.xticks(y_pos, list2)
         plt.ylabel(msg1)
         plt.title(msg2)
         plt.show()
@@ -68,13 +72,13 @@ if __name__ == "__main__":
         return caja, serie[1], aciertos
 
     cte_caja = constante(50, 20)
-    frecs_corridas = []
 
     funciones = [fibonacci, martingala]
     for funcion in funciones:
         variables = (50,1,0)
         numerosTirada = []
         flujoCaja = []
+        frecs_corridas = []
         flujoCaja.append(variables[0])
         j = 0
         while ((flujoCaja[j] > 0) and (j < 20)):
@@ -85,7 +89,7 @@ if __name__ == "__main__":
             print("Tirada número: ", funcion, "Valor: ", tirada, "Caja: ", variables[0],"Apuesta:", variables[1] ,"Aciertos: ",variables[2], "Apuesta número", j + 1)
             frecs_corridas.append(variables[2]/(j+1))
             j = j + 1
-        graficar(flujoCaja, cte_caja, "n(numero de tiradas)", "cc(cantidad de capital)")
+        #graficar(flujoCaja, cte_caja, "n(numero de tiradas)", "cc(cantidad de capital)")
         cte_caja = constante(50, len(flujoCaja))
-        graficar(flujoCaja, cte_caja, "n(numero de tiradas)", "cc(cantidad de capital)")
-        #graficar2(frecs_corridas, "n(numero de tiradas)", "fr(frecuencia relativa)")
+        #graficar(flujoCaja, cte_caja, "n(numero de tiradas)", "cc(cantidad de capital)")
+        graficar2(frecs_corridas,"fr(frecuencia relativa)" ,"n(numero de tiradas)")
