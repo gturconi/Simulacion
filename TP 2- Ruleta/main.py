@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 if __name__ == "__main__":
     rojos = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36]
     negros = [2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35]
-    variables = (500,1,0)
+    variables = (50,1,0)
 
 
     def constante(n, len):
@@ -38,18 +38,36 @@ if __name__ == "__main__":
             apuesta *= 2;
         return caja, apuesta, aciertos
 
+    def fibonacci(valor, caja, apuesta, aciertos):
+        if valor in negros:
+            caja = caja + apuesta
+            aciertos = aciertos + 1
+            serie = [1, 1]
+            while (True):
+                serie.append(serie[0] + serie[1]) 
+                serie.pop(0)
+                if (serie[0] == apuesta) :
+                    break
+        else:
+            caja = caja - apuesta
+            serie = [0, 1]
+        return caja, serie[1], aciertos
 
-    cte_caja = constante(500, 20)
+    cte_caja = constante(50, 20)
     frecs_corridas = []
 
-    for i in range(1):
+    funciones = [fibonacci, martingala]
+    for funcion in funciones:
         numerosTirada = []
         flujoCaja = []
-        for j in range(20):
+        flujoCaja.append(variables[0])
+        j = 0
+        while ((flujoCaja[j] > 0) and (j < 20)):
             tirada = ran.randint(0, 36)
-            flujoCaja.append(variables[0])
             numerosTirada.append(tirada)
-            variables = martingala(tirada, variables[0], variables[1],variables[2])
-            print("Tirada número: ", i + 1, "Valor: ", tirada, "Caja: ", variables[0],"Apuesta:", variables[1] ,"Aciertos: ",variables[2])
+            variables = funcion(tirada, variables[0], variables[1],variables[2])
+            flujoCaja.append(variables[0])
+            print("Tirada número: ", funcion, "Valor: ", tirada, "Caja: ", variables[0],"Apuesta:", variables[1] ,"Aciertos: ",variables[2], "Apuesta número", j + 1)
             frecs_corridas.append(variables[2]/(j+1))
+            j = j + 1
         graficar(flujoCaja, cte_caja, "n(numero de tiradas)", "cc(cantidad de capital)")
