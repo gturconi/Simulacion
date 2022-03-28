@@ -1,0 +1,275 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Journal Article
+% LaTeX Template
+% Version 1.4 (15/5/16)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com) with extensive modifications by
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[onecolumn]{article}
+
+\usepackage{blindtext} % Package to generate dummy text throughout this template \usepackage{float}
+\usepackage{graphicx}
+\usepackage[sc]{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\linespread{1.05} % Line spacing - Palatino needs more space between lines
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage{placeins}
+\usepackage[english]{babel} % Language hyphenation and typographical rules
+\usepackage{subfig}
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry} % Document margins
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+
+\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+
+\usepackage{enumitem} % Customized lists
+\setlist[itemize]{noitemsep} % Make itemize lists more compact
+
+\usepackage{abstract} % Allows abstract customization
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+
+\providecommand{\keywords}[1]
+{
+  \small	
+  \textbf{\textit{Keywords---}} #1
+}
+
+\usepackage{titlesec} % Allows customization of titles
+\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
+\renewcommand\thesubsection{\roman{subsection}} % roman numerals for subsections
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+
+\usepackage{fancyhdr} % Headers and footers
+\pagestyle{fancy} % All pages have headers and footers
+\fancyhead{} % Blank out the default header
+\fancyfoot{} % Blank out the default footer
+\fancyhead[C]{$\bullet$ Marzo 2022 $\bullet$ TP N° 1} % Custom header text
+\fancyfoot[R]{\thepage} % Custom footer text
+
+\usepackage{titling} % Customizing the title section
+
+\usepackage{hyperref} % For hyperlinks in the PDF
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\setlength{\droptitle}{-4\baselineskip} % Move the title up
+
+\pretitle{\begin{center}\Huge\bfseries} % Article title formatting
+\posttitle{\end{center}} % Article title closing formatting
+\title{TP 1.2 Estudio Economico-Matematico de apuestas en La Ruleta} % Article title
+\author{%
+\textbf{Juan I. Torres} \\[0.5ex] % profesor name
+\normalsize Catedra de Simulacion \\ % MATERIA
+\normalsize UTN FRRO \\ % Your institution
+\normalsize Zeballos 1341, S2000 \\ % Your institu
+% \normalsize orkuan@gmail.com \\[3ex]% mail profe
+\normalsize Marzo 29, 2022 \\[1.5ex] % fecha entrega
+\textbf{Integrantes:} \\  
+\normalsize 1-Fadua Dora Sicardi \\
+\normalsize 2-Franco Giangiordano \\
+\normalsize 3-Gonzalo Turconi \\
+\normalsize 4-Ignacio Curti\\
+}
+\date{}
+\renewcommand{\maketitlehookd}{%
+\begin{abstract}
+\noindent\normalsize\normalfont Este trabajo de investigacion tiene por objetivo profundizar el comportamiento de la ruleta dependiendo de las diferentes estrategias abordadas desde el punto de vista del apostador. % Dummy abstract text - replace \blindtext with your abstract text
+\end{abstract}
+\begin{keywords}
+	\noindent\normalsize\normalfont Simulacion, Trabajo Practico, Ruleta, Estrategias.
+\end{keywords}
+}
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+% Print the title
+\maketitle
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+\section{Introduccion}
+\normalsize Apostar en algún juego lleva a controversias de todos los puntos de vista, pero desde el nuestro como ingenieros debemos tener una visión objetiva de cualquier problema, por muy ajeno que nos resulte. Este trabajo, tiene como fin el empleo de nuestra primera simulación, con el objetivo desmitificar estadísticamente la verdadera probabilidad de obtener ganancias con un medio ideal, como es nuestra ruleta simulada. \\[2ex]
+\normalsize Las estrategias que se pueden proponer son varias, pero comenzaremos con una de las más sencillas y fáciles de implementar, dejando al alumno la posibilidad de construir o imitar otras.\\[2ex]
+
+\section{Estrategias Abordadas}
+\begin{itemize}
+\item \textbf{Martingala:} Es una de las estrategias de ruleta más populares, que se puede usar en otros juegos de casino como el blackjack o incluso en apuestas deportivas. La Martingala apareció en la Francia del siglo XVIII, y consiste en empezar con una cantidad fija en la apuesta inicial. Si la jugada es ganadora, se mantiene la apuesta para la siguiente tirada, pero si la apuesta es perdedora, se dobla la apuesta sucesivamente hasta lograr una apuesta ganadora. El beneficio es la apuesta inicial. Existe una variante de esta estrategia llamada martingala inversa. Establecemos una cantidad fija para la apuesta inicial, que mantendremos en caso de perder o duplicaremos si resulta ganadora. Hay que tener en cuenta que por sus características tanto la martingala como la martingala inversa son estrategias de ruleta efectivas en apuestas simples, por ejemplo en apuestas a rojo/negro. En otras apuestas de ruleta, por ejemplos a un número, no se deberían aplicar.\\[2.0ex]
+\item \textbf{Fibonacci:} Este sistema matemático de apuestas sigue la sucesión numérica de Leonardo de Pisa 1-2-3-5-8-13-21-34. Es la suma de las dos cifras anteriores, e indica el stake a jugar. El stake sube cada vez que perdemos, y al acertar, retrocedemos dos niveles. De nuevo, es una apuesta interesante para las apuestas simples pero exige un buen control del bank, en especial si es escaso. Por eso, no es necesario llegar al stake 34 sino que podemos marcar un límite de pérdidas para no comprometer el bank. Es una estrategia muy a largo plazo.\\[2.0ex]
+\item \textbf{D’Alembert:} Esta estrategia depende de que el jugador haga apuestas sencillas por la misma cantidad mientras vaya ganando. Si pierde, apuesta una unidad adicional, y sigue añadiendo en cada apuesta hasta que vuelva a ganar.\\[2.0ex]
+\end{itemize}
+
+\section{Exposicion de los resultados y analisis de los mismos}
+\normalsize En esta seccion podemos ver las graficas de los resultados obtenidos \\[2ex]
+
+\subsection{Fibonacci}
+\begin{figure}[h!]
+ \centering
+  \subfloat[Flujo de capital acotado ]{
+   \label{f:imagen1}
+    \includegraphics[scale=0.4]{Figure_1.png}}
+  \subfloat[Frecuencia Relativa de aciertos con capital acotado]{
+   \label{f:imagen2}
+    \includegraphics[scale=0.4]{Figure_2.png}}
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \subfloat[Flujo de capital infinito ]{
+   \label{f:imagen3}
+    \includegraphics[scale=0.4]{Figure_13.png}} 
+   \subfloat[Frecuencia Relativa de aciertos con capital infinito ]{
+   \label{f:imagen4}
+    \includegraphics[scale=0.4]{Figure_14.png}}  
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \subfloat[Flujo de capital acotado en cada corrida ]{
+   \label{f:imagen5}
+    \includegraphics[scale=0.4]{Figure_7.png}} 
+   \subfloat[Frecuencia Relativa de aciertos en cada corrida con capital acotado ]{
+   \label{f:imagen6}
+    \includegraphics[scale=0.4]{Figure_8.png}}  
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \subfloat[Flujo de capital infinito en cada corrida ]{
+   \label{f:imagen7}
+    \includegraphics[scale=0.4]{Figure_19.png}} 
+   \subfloat[Frecuencia Relativa de aciertos en cada corrida con capital infinito ]{
+   \label{f:imagen8}
+    \includegraphics[scale=0.4]{Figure_20.png}}  
+\end{figure}
+
+\FloatBarrier
+
+\subsection{Martingala}
+\begin{figure}[h!]
+ \centering
+  \subfloat[Flujo de capital acotado ]{
+   \label{f:imagen9}
+    \includegraphics[scale=0.4]{Figure_3.png}}
+  \subfloat[Frecuencia Relativa de aciertos con capital acotado]{
+   \label{f:imagen10}
+    \includegraphics[scale=0.4]{Figure_4.png}}
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \subfloat[Flujo de capital infinito ]{
+   \label{f:imagen11}
+    \includegraphics[scale=0.4]{Figure_15.png}} 
+   \subfloat[Frecuencia Relativa de aciertos con capital infinito ]{
+   \label{f:imagen12}
+    \includegraphics[scale=0.4]{Figure_16.png}}  
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \subfloat[Flujo de capital acotado en cada corrida ]{
+   \label{f:imagen13}
+    \includegraphics[scale=0.4]{Figure_9.png}} 
+   \subfloat[Frecuencia Relativa de aciertos en cada corrida con capital acotado ]{
+   \label{f:imagen14}
+    \includegraphics[scale=0.4]{Figure_10.png}}  
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \subfloat[Flujo de capital infinito en cada corrida ]{
+   \label{f:imagen15}
+    \includegraphics[scale=0.4]{Figure_21.png}} 
+   \subfloat[Frecuencia Relativa de aciertos en cada corrida con capital infinito ]{
+   \label{f:imagen16}
+    \includegraphics[scale=0.4]{Figure_22.png}}  
+\end{figure}
+
+\FloatBarrier
+
+\subsection{d'Alembert}
+\begin{figure}[h!]
+ \centering
+  \subfloat[Flujo de capital acotado ]{
+   \label{f:imagen9}
+    \includegraphics[scale=0.4]{Figure_5.png}}
+  \subfloat[Frecuencia Relativa de aciertos con capital acotado]{
+   \label{f:imagen10}
+    \includegraphics[scale=0.4]{Figure_6.png}}
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \subfloat[Flujo de capital infinito ]{
+   \label{f:imagen11}
+    \includegraphics[scale=0.4]{Figure_17.png}} 
+   \subfloat[Frecuencia Relativa de aciertos con capital infinito ]{
+   \label{f:imagen12}
+    \includegraphics[scale=0.4]{Figure_18.png}}  
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \subfloat[Flujo de capital acotado en cada corrida ]{
+   \label{f:imagen13}
+    \includegraphics[scale=0.4]{Figure_11.png}} 
+   \subfloat[Frecuencia Relativa de aciertos en cada corrida con capital acotado ]{
+   \label{f:imagen14}
+    \includegraphics[scale=0.4]{Figure_12.png}}  
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \subfloat[Flujo de capital infinito en cada corrida ]{
+   \label{f:imagen15}
+    \includegraphics[scale=0.4]{Figure_23.png}} 
+   \subfloat[Frecuencia Relativa de aciertos en cada corrida con capital infinito ]{
+   \label{f:imagen16}
+    \includegraphics[scale=0.4]{Figure_24.png}}  
+\end{figure}
+
+\FloatBarrier
+
+
+\section{Conclusion}
+\normalsize Utilizando la estrategia Martingala si duplicas tu apuesta inicial una y otra vez, tarde o temprano la bola de la ruleta caerá en un número que te permita ganar la apuesta.
+A medida que el número de intentos se acerca al infinito, la probabilidad de fracasar se acerca al 0. Esto significa que con recursos infinitos y sin limitaciones del casino, acabarás ganando. 
+Por otro lado, en la realidad, los jugadores disponen de un presupuesto limitado por lo que si un jugador emplea la estrategia a largo plazo, acabará perdiendo todo su dinero y no podrá realizar más apuestas que le permitan completar un ciclo ganador.
+Utilizando la estrategia de Fibonacci, si el jugador logra volver al inicio de la secuencia y ganar la apuesta correspondiente al primer número, completa un ciclo ganador por lo que una apuesta ganadora puede no ser suficiente para compensar una serie de apuestas perdedoras. 
+Podemos decir que la estrategia de Fibonacci requiere más giros de la rueda para obtener el mismo beneficio que la estrategia Martingale. Implica que esta es estrategia es menos riesgosa. 
+El gráfico crece a un ritmo ligeramente inferior respecto a la estrategia anterior, esto se debe a que la estrategia de Fibonacci es menos riesgosa y requiere más giros para ser rentable. La caja crece de forma más lenta, pero también lo hace el importe de las apuestas cuando se tiene una mala racha.
+La estrategia de d'Alembert mantiene el punto de equilibrio eligiendo gastos moderados. Incluso si apuestas muy poco, puedes mantener tu caja por más tiempo. Dado que es un sistema de apuestas muy equilibrado y de baja inversión, las ganancias nunca son muy altas.\\[2ex]
+%----------------------------------------------------------------------------------------
+%	REFERENCE LIST
+%----------------------------------------------------------------------------------------
+
+\begin{thebibliography}{99} % Bibliography - this is intentionally simple in this template
+
+\normalsize \href{https://python-para-impacientes.blogspot.com/2014/08/graficos-en-ipython.html}{https://python-para-impacientes.blogspot.com/2014/08/graficos-en-ipython.html}\\
+\normalsize \href{https://relopezbriega.github.io/blog/2015/06/27/probabilidad-y-estadistica-con-python/}{https://relopezbriega.github.io/blog/2015/06/27/probabilidad-y-estadistica-con-python/} \\
+\normalsize \href{https://www.casasdeapuestas.com/estrategias-ruleta/} \\
+\normalsize \href{https://www.casino.org/es/ruleta/estrategia/} \\
+ 
+\end{thebibliography}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
