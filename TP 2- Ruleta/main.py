@@ -39,6 +39,16 @@ if __name__ == "__main__":
         plt.title(msg2)
         plt.show()
 
+    def graficarMultiples(list1, list2, msg1, msg2, msg3):
+        plt.plot(list2)
+        plt.xlabel(msg1)
+        plt.ylabel(msg2)
+        plt.title(msg3)
+        colores = ['r', 'g', 'b']
+        for i in range(len(list1)):
+            plt.plot(list1[i], color = colores[i])
+        plt.show()
+
     def martingala(valor, caja, apuesta, aciertos):
         if (valor in negros):
             caja = caja + apuesta
@@ -147,9 +157,9 @@ if __name__ == "__main__":
             promCaja_dalem[i] = promCaja_dalem[i]/5
             promCaja_martin[i] = promCaja_martin[i]/5
             promCaja_fibo[i] = promCaja_fibo[i]/5
-        graficar(promCaja_fibo, constante(cajaInicial, 100), "n(numero de tiradas)", "ccp(cantidad de capital promedio)", "Flujo de caja promedio Fibonacci de todas las corridas. " + nombreCaja)
-        graficar(promCaja_martin, constante(cajaInicial, 100), "n(numero de tiradas)", "ccp(cantidad de capital promedio)", "Flujo de caja promedio Martingala de todas las corridas. " + nombreCaja)
-        graficar(promCaja_dalem, constante(cajaInicial, 100), "n(numero de tiradas)", "ccp(cantidad de capital promedio)", "Flujo de caja promedio Dalembert de todas las corridas. " + nombreCaja)
+        listaProm = [promCaja_fibo, promCaja_martin, promCaja_dalem]
+
+        graficarMultiples(listaProm, constante(cajaInicial, 100), "n(numero de tiradas)", "ccp(cantidad de capital promedio)", "Flujo de caja promedio de todas las corridas. " + nombreCaja) 
         graficar(flujoCaja_fibo, constante(cajaInicial, 5), "n(numero de tiradas)", "cc(cantidad de capital)","Flujo de caja Fibonacci de cada corrida. " + nombreCaja)
         graficar2(frecs_total_fibo, "fr(frecuencia relativa)", "Frecuencia relativa de aciertos Fibonacci de cada corrida. " + nombreCaja)
         graficar(flujoCaja_martin, constante(cajaInicial, 5), "n(numero de tiradas)", "cc(cantidad de capital)","Flujo de caja Martingala de cada corrida. " + nombreCaja)
