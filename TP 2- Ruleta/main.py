@@ -51,23 +51,23 @@ if __name__ == "__main__":
 
 
     def fibonacci(valor, caja, apuesta, aciertos):
-        if valor in negros:
+        if (valor in negros):
             caja = caja + apuesta
+            serie = [0, 1]
             aciertos = aciertos + 1
+        else:
+            caja = caja - apuesta
             serie = [1, 1]
             while (True):
                 serie.append(serie[0] + serie[1])
                 serie.pop(0)
                 if (serie[0] == apuesta):
                     break
-        else:
-            caja = caja - apuesta
-            serie = [0, 1]
         return caja, serie[1], aciertos
 
 
     def dalembert(valor, caja, apuesta, aciertos):
-        if valor in negros:
+        if (valor in negros):
             caja = caja + apuesta
             aciertos = aciertos + 1
             if (apuesta > 1):
