@@ -23,7 +23,6 @@ if __name__ == "__main__":
         plt.title(msg3)
         plt.show()
 
-
     def graficarCorridas(list1, list2, msg1, msg2,msg3):
         plt.plot(list2)
         plt.xlabel(msg1)
@@ -45,6 +44,17 @@ if __name__ == "__main__":
 
         plt.ylabel(msg1)
         plt.title(msg2)
+        plt.show()
+
+
+    def graficarMultiples(list1, list2, msg1, msg2, msg3):
+        plt.plot(list2)
+        plt.xlabel(msg1)
+        plt.ylabel(msg2)
+        plt.title(msg3)
+        colores = ['r', 'g', 'b']
+        for i in range(len(list1)):
+            plt.plot(list1[i], color=colores[i])
         plt.show()
 
 
@@ -135,6 +145,7 @@ if __name__ == "__main__":
                           variables[1],
                           "Aciertos: ", variables[2], "Apuesta número", j)
                     frecs_corridas.append(variables[2] / (j))
+
                 if (i == 0):
                     cte_caja = constante(cajaInicial, len(flujoCaja))
                     if (funcion == fibonacci):
@@ -153,7 +164,7 @@ if __name__ == "__main__":
                         graficar2(frecs_corridas, "fr(frecuencia relativa)",
                                   "Frecuencia relativa de aciertos Dalembert. " + nombreCaja)
                 if (funcion == fibonacci):
-                    if(flujoCaja[len(flujoCaja)-1] < 0):
+                    if (flujoCaja[len(flujoCaja) - 1] < 0):
                         fibo_flujoCaja_acum.append(flujoCaja[0:len(flujoCaja) - 1])
                         fibo_flujoCaja_acum[i].extend([0])
                     else:
@@ -162,33 +173,29 @@ if __name__ == "__main__":
                     frecs_total_fibo.append(frecs_corridas[j - 1])
                 elif (funcion == martingala):
                     if (flujoCaja[len(flujoCaja) - 1] < 0):
-                        dalem_flujoCaja_acum.append(flujoCaja[0:len(flujoCaja) - 1])
-                        dalem_flujoCaja_acum[i].extend([0])
-                    else:
-                        dalem_flujoCaja_acum.append(flujoCaja)
-
-                    flujoCaja_martin.append(flujoCaja[j - 1])
-                    frecs_total_martin.append(frecs_corridas[j - 1])
-                else:
-                    if (flujoCaja[len(flujoCaja) - 1] < 0):
                         martin_flujoCaja_acum.append(flujoCaja[0:len(flujoCaja) - 1])
                         martin_flujoCaja_acum[i].extend([0])
                     else:
                         martin_flujoCaja_acum.append(flujoCaja)
+                    flujoCaja_martin.append(flujoCaja[j - 1])
+                    frecs_total_martin.append(frecs_corridas[j - 1])
+                else:
+                    if (flujoCaja[len(flujoCaja) - 1] < 0):
+                        dalem_flujoCaja_acum.append(flujoCaja[0:len(flujoCaja) - 1])
+                        dalem_flujoCaja_acum[i].extend([0])
+                    else:
+                        dalem_flujoCaja_acum.append(flujoCaja)
                     flujoCaja_dalem.append(flujoCaja[j - 1])
                     frecs_total_dalem.append(frecs_corridas[j - 1])
-        graficarCorridas(fibo_flujoCaja_acum, constante(cajaInicial, 100), "n(numero de tiradas)", "cc(cantidad de capital)",
-                 "Flujo de caja corridas Fibonacci. ")
-        graficarCorridas(dalem_flujoCaja_acum, constante(cajaInicial, 100), "n(numero de tiradas)",
-                         "cc(cantidad de capital)",
-                         "Flujo de caja corridas Dalembert. ")
-        graficarCorridas(dalem_flujoCaja_acum, constante(cajaInicial, 100), "n(numero de tiradas)",
-                         "cc(cantidad de capital)",
-                         "Flujo de caja corridas Martingala. ")
         for i in range(100):
             promCaja_dalem[i] = promCaja_dalem[i] / 5
             promCaja_martin[i] = promCaja_martin[i] / 5
             promCaja_fibo[i] = promCaja_fibo[i] / 5
+        listaProm = [promCaja_fibo, promCaja_martin, promCaja_dalem]
+
+        graficarMultiples(listaProm, constante(cajaInicial, 100), "n(numero de tiradas)",
+                          "ccp(cantidad de capital promedio)",
+                          "Flujo de caja promedio de todas las corridas. " + nombreCaja)
         graficar(flujoCaja_fibo, constante(cajaInicial, 5), "n(numero de tiradas)", "cc(cantidad de capital)",
                  "Flujo de caja Fibonacci de cada corrida. " + nombreCaja)
         graficar2(frecs_total_fibo, "fr(frecuencia relativa)",
