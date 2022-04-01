@@ -28,16 +28,16 @@ if __name__ == "__main__":
     def graficar2(list, msg1, msg2):
         length = len(list)
         y_pos = np.arange(length)
-        plt.bar(y_pos, list, color="b", width=0.25)
+        plt.figure(figsize=(50, 10))
+        plt.bar(y_pos, list, color="b", width=0.25, align='edge')
 
         list2 = []
         for i in range(length):
             list2.append(i + 1)
-        plt.xticks(y_pos, list2)
+
         plt.ylabel(msg1)
         plt.title(msg2)
         plt.show()
-
 
     def martingala(valor, caja, apuesta, aciertos):
         if (valor in negros):
