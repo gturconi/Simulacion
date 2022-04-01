@@ -100,7 +100,7 @@ if __name__ == "__main__":
                 frecs_corridas = []
                 flujoCaja.append(variables[0])
                 j = 0
-                while ((flujoCaja[j] > 0) and (j < 20)):
+                while ((flujoCaja[j] > 0) and (j < 100)):
                     tirada = ran.randint(0, 36)
                     numerosTirada.append(tirada)
                     variables = funcion(tirada, variables[0], variables[1], variables[2])
