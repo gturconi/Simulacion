@@ -190,12 +190,12 @@ if __name__ == "__main__":
         graficarCorridas(fibo_flujoCaja_acum, constante(cajaInicial, 100), "n(numero de tiradas)",
                          "cc(cantidad de capital)",
                          "Flujo de caja corridas Fibonacci. ")
+        graficarCorridas(martin_flujoCaja_acum, constante(cajaInicial, 100), "n(numero de tiradas)",
+                         "cc(cantidad de capital)",
+                         "Flujo de caja corridas Martingala. ")
         graficarCorridas(dalem_flujoCaja_acum, constante(cajaInicial, 100), "n(numero de tiradas)",
                          "cc(cantidad de capital)",
                          "Flujo de caja corridas Dalembert. ")
-        graficarCorridas(dalem_flujoCaja_acum, constante(cajaInicial, 100), "n(numero de tiradas)",
-                         "cc(cantidad de capital)",
-                         "Flujo de caja corridas Martingala. ")
         for i in range(100):
             promCaja_dalem[i] = promCaja_dalem[i] / 5
             promCaja_martin[i] = promCaja_martin[i] / 5
