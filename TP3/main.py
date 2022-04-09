@@ -1,5 +1,10 @@
 
+
   # semilla recomendada: 4798373
+
+from PIL import Image
+
+
 
 class Randu:
     def __init__(self, n, seed):
@@ -40,7 +45,7 @@ class Rand:
         for i in range(1, self.n):
             print("Valor", x[i])
             print("Normalizacion", u[i])
-
+        bitmap(u)
 
 class Square:
     def __init__(self, n, seed):
@@ -68,10 +73,22 @@ class Square:
             print("Numero", float(numbers[i]))
 
 
+def bitmap(values):
+    img = Image.new('RGB', (255, 255), "black")  # Create a new black image
+    pixels = img.load()  # Create the pixel map
+    for i in range(img.size[0]):  # For every pixel:
+        for j in range(img.size[1]):
+            pixels[i, j] = (int(255*values[j]), int(255*values[j]), int(255*values[j]))  # Set the colour accordingly
+
+
+    img.show()
+
 
 if __name__ == "__main__":
-    square = Square(10,1931)
-    square.mid_square()
+    rand = Rand(65025,4798373)
+    rand.rand()
+
+
 
 
 
