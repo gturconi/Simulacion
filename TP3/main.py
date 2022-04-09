@@ -3,6 +3,11 @@
   # semilla recomendada: 4798373
 
 from PIL import Image
+import numpy as np
+import pylab as plt
+
+
+
 
 
 
@@ -25,7 +30,7 @@ class Randu:
         for i in range(1, self.n):
             print("Valor", x[i])
             print("Normalizacion", u[i])
-
+        bitmap(u)
 
 class Rand:
     def __init__(self, n, seed):
@@ -45,7 +50,7 @@ class Rand:
         for i in range(1, self.n):
             print("Valor", x[i])
             print("Normalizacion", u[i])
-        bitmap(u)
+        bitmap(np.reshape(u, (255, 255)))
 
 class Square:
     def __init__(self, n, seed):
@@ -71,22 +76,19 @@ class Square:
             print("Valor" , x[i])
             print("Semilla", int(seeds[i]))
             print("Numero", float(numbers[i]))
-
+        bitmap(numbers)
 
 def bitmap(values):
-    img = Image.new('RGB', (255, 255), "black")  # Create a new black image
-    pixels = img.load()  # Create the pixel map
-    for i in range(img.size[0]):  # For every pixel:
-        for j in range(img.size[1]):
-            pixels[i, j] = (int(255*values[j]), int(255*values[j]), int(255*values[j]))  # Set the colour accordingly
+    plt.imshow(values, cmap='gray', interpolation='nearest')
+    plt.show()
 
-
-    img.show()
 
 
 if __name__ == "__main__":
     rand = Rand(65025,4798373)
     rand.rand()
+
+
 
 
 
