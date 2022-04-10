@@ -30,7 +30,7 @@ class Randu:
         for i in range(1, self.n):
             print("Valor", x[i])
             print("Normalizacion", u[i])
-        bitmap(u)
+        bitmap(np.reshape(u, (255, 255)))
 
 class Rand:
     def __init__(self, n, seed):
@@ -76,7 +76,8 @@ class Square:
             print("Valor" , x[i])
             print("Semilla", int(seeds[i]))
             print("Numero", float(numbers[i]))
-        bitmap(numbers)
+        numbers = np.array(numbers, dtype=np.float32)
+        bitmap(np.reshape(numbers.astype(np.float64), (255, 255)))
 
 def bitmap(values):
     plt.imshow(values, cmap='gray', interpolation='nearest')
@@ -85,8 +86,8 @@ def bitmap(values):
 
 
 if __name__ == "__main__":
-    rand = Rand(65025,4798373)
-    rand.rand()
+    rand = Square(65025,4798373)
+    rand.mid_square()
 
 
 
