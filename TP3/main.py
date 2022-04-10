@@ -6,6 +6,7 @@
 from PIL import Image
 import numpy as np
 import pylab as plt
+import scipy
 from statsmodels.sandbox.stats.runs import runstest_1samp
 
 
@@ -33,7 +34,7 @@ class Randu:
         for i in range(1, self.n):
             print("Valor", x[i])
             print("Normalizacion", u[i])
-        runTest(u)
+        chisq_test(u)
         #bitmap(np.reshape(u, (1000, 1000)))
 
 class Rand:
@@ -100,6 +101,10 @@ def bitmap(values):
 #Perform Runs test
 def runTest(data):
     print(runstest_1samp(data, correction=False))
+
+def chisq_test(data):
+    hi2, p, dof, expected = scipy.stats.chi2_contingency(data)
+    print(hi2,p,dof)
 
 
 if __name__ == "__main__":
