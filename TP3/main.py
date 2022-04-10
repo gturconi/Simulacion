@@ -1,10 +1,13 @@
 
 
   # semilla recomendada: 4798373
+  #Otras semillas: 1257787
 
 from PIL import Image
 import numpy as np
 import pylab as plt
+from statsmodels.sandbox.stats.runs import runstest_1samp
+
 
 
 
@@ -30,7 +33,8 @@ class Randu:
         for i in range(1, self.n):
             print("Valor", x[i])
             print("Normalizacion", u[i])
-        bitmap(np.reshape(u, (255, 255)))
+        runTest(u)
+        #bitmap(np.reshape(u, (1000, 1000)))
 
 class Rand:
     def __init__(self, n, seed):
@@ -50,7 +54,7 @@ class Rand:
         for i in range(1, self.n):
             print("Valor", x[i])
             print("Normalizacion", u[i])
-        bitmap(np.reshape(u, (255, 255)))
+        bitmap(np.reshape(u, (1000, 1000)))
 
 class Square:
     def __init__(self, n, seed):
@@ -77,27 +81,31 @@ class Square:
             print("Semilla", int(seeds[i]))
             print("Numero", float(numbers[i]))
         numbers = np.array(numbers, dtype=np.float32)
-        bitmap(np.reshape(numbers.astype(np.float64), (255, 255)))
+        bitmap(np.reshape(numbers.astype(np.float64), (1000, 1000)))
 
 def randomTest():
-    z = np.random.random((255, 255))  # Test data
+    z = np.random.random((1000, 1000))  # Test data
     bitmap(z)
 
 def uniformTest():
     z = []
     for i in range(65025):
-        z.append(np.random.uniform((255, 255))[0])
-    bitmap(np.reshape(z, (255, 255)))
+        z.append(np.random.uniform((1000, 1000))[0])
+    bitmap(np.reshape(z, (1000, 1000)))
 
 def bitmap(values):
     plt.imshow(values, cmap='gray', interpolation='nearest')
     plt.show()
 
+#Perform Runs test
+def runTest(data):
+    print(runstest_1samp(data, correction=False))
+
 
 if __name__ == "__main__":
-    uniformTest()
-    #rand = Square(65025,4798373)
-    #rand.mid_square()
+    #uniformTest()
+    rand = Randu(255*255,1257787)
+    rand.randu()
 
 
 
