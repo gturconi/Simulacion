@@ -79,15 +79,25 @@ class Square:
         numbers = np.array(numbers, dtype=np.float32)
         bitmap(np.reshape(numbers.astype(np.float64), (255, 255)))
 
+def randomTest():
+    z = np.random.random((255, 255))  # Test data
+    bitmap(z)
+
+def uniformTest():
+    z = []
+    for i in range(65025):
+        z.append(np.random.uniform((255, 255))[0])
+    bitmap(np.reshape(z, (255, 255)))
+
 def bitmap(values):
     plt.imshow(values, cmap='gray', interpolation='nearest')
     plt.show()
 
 
-
 if __name__ == "__main__":
-    rand = Square(65025,4798373)
-    rand.mid_square()
+    uniformTest()
+    #rand = Square(65025,4798373)
+    #rand.mid_square()
 
 
 
