@@ -8,7 +8,7 @@ import numpy as np
 import pylab as plt
 import scipy
 from statsmodels.sandbox.stats.runs import runstest_1samp
-
+import math
 
 
 
@@ -35,6 +35,9 @@ class Randu:
             print("Valor", x[i])
             print("Normalizacion", u[i])
         chisq_test(u)
+        testArribaAbajo(u)
+        testCorridas(u)
+        runTest(u)
         #bitmap(np.reshape(u, (1000, 1000)))
 
 class Rand:
@@ -107,18 +110,71 @@ def chisq_test(data):
     print(hi2,p,dof)
 
 
+def testArribaAbajo(p):
+      print("Test arriba y abajo : ")
+      x = []
+      corridas = 1
+      contmas = 0
+      contmenos = 0
+      u = []
+
+      for i in range(len(p) - 1):
+          u.append(float(p[i]))
+      med = np.mean(u)
+
+      for i in range(len(u)):
+          if u[i] >= med:
+              x.append("+")
+          elif (u[i] < med):
+              x.append("-")
+
+      for i in range(1, len(x)):
+          if (x[i] != x[i - 1]):
+              corridas += 1
+
+      if (x[0] == "+"):
+          contmas += 1
+      else:
+          contmenos += 1
+      for i in range(1, len(x)):
+          if (x[i] == "+"):
+              contmas += 1
+          else:
+              contmenos += 1
+
+      n = contmas + contmenos
+      media = ((2 * contmenos * contmas) / (contmas + contmenos)) + 1
+      desviacion = math.sqrt(((2 * contmenos * contmas * (2 * contmas * contmenos - n)) / ((n ** 2) * (n - 1))))
+      z = (corridas - media) / desviacion
+      print("Z <=" + str(z))
+
+
+def testCorridas(u):
+	print("Test de Corridas: ")
+	x = []
+	a = 1
+	for i in range(len(u)-1):
+		if u[i+1] >= u[i]:
+			x.append("+")
+		elif(u[i+1] < u[i]):
+			x.append("-")
+
+	for i in range(1, len(x)):
+		if (x[i] != x[i-1]):
+			a += 1
+	n = len(x)
+	media = (2*n-1)/3
+	desviacion = math.sqrt((16*n-29)/90)
+	z = (a-media)/desviacion
+	print("Z <= "+ str(z))
+
+
+
+
+
 if __name__ == "__main__":
     #uniformTest()
     rand = Randu(255*255,1257787)
     rand.randu()
-
-
-
-
-
-
-
-
-
 
 
