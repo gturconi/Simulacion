@@ -18,8 +18,10 @@ import math
 
 
 
-
-
+def normalizar(arr):
+    for x in arr:
+       x = x  / (2 ** 31 - 1)
+    return arr
 
 class Randu:
     def __init__(self, n, seed):
@@ -40,12 +42,12 @@ class Randu:
         for i in range(1, self.n):
             print("Valor", x[i])
             print("Normalizacion", u[i])
-        #testPoker(u)
-        #chisq_test(u)
-        #testArribaAbajo(u)
+        testPoker(u)
+        chisq_test(u)
+        testArribaAbajo(u)
         #testCorridas(u)
-        #runTest(u)
-        bitmap(np.reshape(u, (500, 500)))
+        runTest(u)
+        #bitmap(np.reshape(u, (500, 500)))
 
 
 class Rand:
@@ -66,12 +68,20 @@ class Rand:
         for i in range(1, self.n):
             print("Valor", x[i])
             print("Normalizacion", u[i])
-        bitmap(np.reshape(u, (1000, 1000)))
+        #bitmap(np.reshape(u, (1000, 1000)))
+        testPoker(u)
+        chisq_test(u)
+        testArribaAbajo(u)
+        runTest(u)
+                #testCorridas(u)
+        
 
 class Square:
     def __init__(self, n, seed):
         self.n=n
         self.seed=seed
+
+          
 
     def mid_square(self):
         seeds = [0 for _ in range(self.n)]
@@ -93,11 +103,16 @@ class Square:
             print("Semilla", int(seeds[i]))
             print("Numero", float(numbers[i]))
         numbers = np.array(numbers, dtype=np.float32)
-        bitmap(np.reshape(numbers.astype(np.float64), (1000, 1000)))
+        testArribaAbajo(numbers)
+        testPoker(numbers)
+        chisq_test(numbers)
+        runTest(numbers)
+        #bitmap(np.reshape(numbers.astype(np.float64), (1000, 1000)))
 
 def randomTest():
     z = np.random.random((1000, 1000))  # Test data
-    bitmap(z)
+    testArribaAbajo(z)
+    #bitmap(z)
 
 def bitmap(values):
     plt.imshow(values, cmap='gray', interpolation='nearest')
@@ -159,6 +174,10 @@ def pokerCaracteres(u):
 	tresIguales = 0
 	for i in range(len(u)):
 		c = str(u[i])
+		l = len(c)
+		if(l < 5):
+		   for i in range(l,5):
+		       c = c + '0'
 		if(c[2] != c[3] and c[2] != c[4] and c[3] != c[4]):
 			distintos += 1
 		elif(c[2] == c[3] and c[2] == c[4] and c[3] == c[4]):
@@ -177,7 +196,7 @@ def testPoker(u):
     y = []
     z = []
     distintosEsperado = 0.72
-    dosIgualesEsperado = 0.09
+    dosIgualesEsperado = 0.27
     tresIgualesEsperado = 0.01
 
     distintos, dosIguales, tresIguales = pokerCaracteres(u)
@@ -212,9 +231,9 @@ def testCorridas(u):
 
 
 if __name__ == "__main__":
-    #rand = Randu(500*500,1257787)
-    #rand.randu()
-    #sq = Square(1000*1000,5678)
+    #rand = Rand(500*500,1257787)
+    #rand.rand()
+    #sq = Square(500*500,3708)
     #sq.mid_square()
     #decimalFractions = ""
     #print(array.split())
@@ -250217,9 +250236,16 @@ if __name__ == "__main__":
 0.6440488651
 0.4306333316
 '''
-    print(arr);
+
     current_array = arr.split();
     desired_array = [float(numeric_string) for numeric_string in current_array];
+    desired_array = normalizar(desired_array)
+    #bitmap(np.reshape(desired_array, (500, 500)))
     testArribaAbajo(desired_array)
+    testPoker(desired_array)
+    chisq_test(desired_array)
+    testArribaAbajo(desired_array)
+    runTest(desired_array)
+
 
 
