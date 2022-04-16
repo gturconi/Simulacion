@@ -9,9 +9,10 @@ from random import random
 
 import numpy as np
 import pylab as plt
-import scipy
+from scipy.stats import chisquare
 from statsmodels.sandbox.stats.runs import runstest_1samp
 import math
+import collections
 
 
 
@@ -22,6 +23,10 @@ def normalizar(arr):
     for x in arr:
        x = x  / (2 ** 31 - 1)
     return arr
+
+def frecuencias(arr):
+   elements_count = collections.Counter(arr)
+   return elements_count
 
 class Randu:
     def __init__(self, n, seed):
@@ -250241,11 +250246,14 @@ if __name__ == "__main__":
     desired_array = [float(numeric_string) for numeric_string in current_array];
     desired_array = normalizar(desired_array)
     #bitmap(np.reshape(desired_array, (500, 500)))
-    testArribaAbajo(desired_array)
-    testPoker(desired_array)
-    chisq_test(desired_array)
-    testArribaAbajo(desired_array)
-    runTest(desired_array)
+    fr = frecuencias(desired_array)
+    fr = [x/25000 for x in [*fr.keys()]]
+    print("Chi square test result: " , chisquare(fr))
+    #testArribaAbajo(desired_array)
+    #testPoker(desired_array)
+    #chisq_test(desired_array)
+    #testArribaAbajo(desired_array)
+    #runTest(desired_array)
 
 
 
