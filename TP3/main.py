@@ -174,22 +174,22 @@ def pokerSuma(observado, esperado):
   return (((observado - esperado) ** 2) / esperado)
 
 def pokerCaracteres(u):
-	distintos = 0
-	dosIguales = 0
-	tresIguales = 0
-	for i in range(len(u)):
-		c = str(u[i])
-		l = len(c)
-		if(l < 5):
-		   for i in range(l,5):
-		       c = c + '0'
-		if(c[2] != c[3] and c[2] != c[4] and c[3] != c[4]):
-			distintos += 1
-		elif(c[2] == c[3] and c[2] == c[4] and c[3] == c[4]):
-			tresIguales += 1
-		else:
-			dosIguales += 1
-	return distintos,dosIguales,tresIguales
+    distintos = 0
+    dosIguales = 0
+    tresIguales = 0
+    for i in range(len(u)):
+        c = str(u[i])
+        l = len(c)
+        if(l < 5):
+            for i in range(l,5):
+                c = c + '0'
+        if(c[2] != c[3] and c[2] != c[4] and c[3] != c[4]):
+            distintos += 1
+        elif(c[2] == c[3] and c[2] == c[4] and c[3] == c[4]):
+            tresIguales += 1
+        else:
+            dosIguales += 1
+    return distintos,dosIguales,tresIguales
 
 def pokerSuma(observado,esperado):
 	return(((observado-esperado)**2)/esperado)
@@ -250244,10 +250244,10 @@ if __name__ == "__main__":
 
     current_array = arr.split();
     desired_array = [float(numeric_string) for numeric_string in current_array];
-    desired_array = normalizar(desired_array)
+    #desired_array = normalizar(desired_array)
     #bitmap(np.reshape(desired_array, (500, 500)))
     fr = frecuencias(desired_array)
-    fr = [x/25000 for x in [*fr.keys()]]
+    fr = [x/250000 for x in [*fr.keys()]]
     print("Chi square test result: " , chisquare(fr))
     #testArribaAbajo(desired_array)
     #testPoker(desired_array)
