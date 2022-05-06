@@ -15,15 +15,6 @@ import math
 import collections
 
 
-
-
-
-
-def normalizar(arr):
-    for x in arr:
-       x = x  / (2 ** 31 - 1)
-    return arr
-
 def frecuencias(arr):
    elements_count = collections.Counter(arr)
    return elements_count
@@ -47,11 +38,13 @@ class Randu:
         for i in range(1, self.n):
             print("Valor", x[i])
             print("Normalizacion", u[i])
-        testPoker(u)
-        chisq_test(u)
-        testArribaAbajo(u)
+        #testPoker(u)
+        fr = frecuencias(u)
+        fr = [x/25000 for x in [*fr.keys()]]
+        print("Chi square test result: " , chisquare(fr))
+        #testArribaAbajo(u)
         #testCorridas(u)
-        runTest(u)
+        #runTest(u)
         #bitmap(np.reshape(u, (500, 500)))
 
 
@@ -74,10 +67,13 @@ class Rand:
             print("Valor", x[i])
             print("Normalizacion", u[i])
         #bitmap(np.reshape(u, (1000, 1000)))
-        testPoker(u)
-        chisq_test(u)
-        testArribaAbajo(u)
-        runTest(u)
+        fr = frecuencias(u)
+        fr = [x/25000 for x in [*fr.keys()]]
+        print("Chi square test result: " , chisquare(fr))
+        #testPoker(u)
+        #chisq_test(u)
+        #testArribaAbajo(u)
+        #runTest(u)
                 #testCorridas(u)
         
 
@@ -108,15 +104,21 @@ class Square:
             print("Semilla", int(seeds[i]))
             print("Numero", float(numbers[i]))
         numbers = np.array(numbers, dtype=np.float32)
-        testArribaAbajo(numbers)
-        testPoker(numbers)
-        chisq_test(numbers)
-        runTest(numbers)
+        fr = frecuencias(numbers)
+        fr = [x/25000 for x in [*fr.keys()]]
+        print("Chi square test result: " , chisquare(fr))
+        #testArribaAbajo(numbers)
+        #testPoker(numbers)
+        #chisq_test(numbers)
+        #runTest(numbers)
         #bitmap(np.reshape(numbers.astype(np.float64), (1000, 1000)))
 
 def randomTest():
     z = np.random.random((1000, 1000))  # Test data
-    testArribaAbajo(z)
+    runTest(z.flatten())
+    #fr = frecuencias(z.flatten())
+    #fr = [x/25000 for x in [*fr.keys()]]
+    #print("Chi square test result: " , chisquare(fr))
     #bitmap(z)
 
 def bitmap(values):
@@ -236,8 +238,9 @@ def testCorridas(u):
 
 
 if __name__ == "__main__":
-    #rand = Rand(500*500,1257787)
-    #rand.rand()
+    #rand = Square(500*500,1257787)
+    #rand.mid_square()
+    #randomTest();
     #sq = Square(500*500,3708)
     #sq.mid_square()
     #decimalFractions = ""
@@ -250244,16 +250247,15 @@ if __name__ == "__main__":
 
     current_array = arr.split();
     desired_array = [float(numeric_string) for numeric_string in current_array];
-    desired_array = normalizar(desired_array)
     #bitmap(np.reshape(desired_array, (500, 500)))
-    fr = frecuencias(desired_array)
-    fr = [x/25000 for x in [*fr.keys()]]
-    print("Chi square test result: " , chisquare(fr))
+   ## fr = frecuencias(desired_array)
+   ## fr = [x/25000 for x in [*fr.keys()]]
+   ## print("Chi square test result: " , chisquare(fr))
     #testArribaAbajo(desired_array)
     #testPoker(desired_array)
     #chisq_test(desired_array)
     #testArribaAbajo(desired_array)
-    #runTest(desired_array)
+    runTest(desired_array)
 
 
 
