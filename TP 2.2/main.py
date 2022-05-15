@@ -1,37 +1,55 @@
-
+import random
+import matplotlib.pyplot as plt
 from numpy.random import random
 from numpy import floor, log as ln, exp
 
+#En esta parte del codigo estan las distribuciones
 
 # Genenador distribucion Uniforme
-def uniform(a, b):
-    r = random()
-    x = a + (b - a) * r
+def uniform (a,b):
+    x = []
+    for i in range(500):
+        r = random()
+        x.append(a+(b-a)*r)
     return x
+dist_uniforme=(uniform(1,4))
+
 
 # Genenador distribucion Exponencial
 def exponential(ex):
-    r = random()
-    x = -ex * ln(r)
+    x = []
+    for i in range(500):
+        r = random()
+        x += [-ex * ln(r)]
     return x
+dist_exponencial=(exponential(7))
+
 
 # Genenador distribucion Gamma
 def gamma(k, alpha):
-    tr = 1
-    for i in range(k):
-        r = random()
-        tr = tr * r
-    x = -ln(tr) / alpha
+    x = []
+    for j in range(500):
+        tr = 1
+        for i in range(k):
+            r = random()
+            tr = tr * r
+            x.append(-ln(tr) / alpha)
     return x
+dist_gamma=(gamma(5,10))
+
 
 # Genenador distribucion Normal
-def normal(ex, stdx):
-    sum = 0
-    for i in range(12):
-        r = random()
-        sum += r
-    x = stdx * (sum - 6) + ex
+def normal(ex,stdx):
+    x=[]
+    for i in range(500):
+        sum = 0
+        for j in range (12):
+            r=random()
+            sum += r
+        x+=[stdx*(sum-6.0)+ex]
     return x
+dist_normal = normal(2.35, 30)
+
 
 # Genenador distribucion Pascal
 def pascal(k,q):
@@ -43,6 +61,8 @@ def pascal(k,q):
     x = floor(ln(tr)/qr)
     return x
 
+
+
 #Genenador distribucion Binomial
 def binomial(n, p):
     x = 0
@@ -51,6 +71,8 @@ def binomial(n, p):
         if ((r - p) <= 0):
             x += 1
     return x
+
+
 
 #Genenador distribucion Hypergeometrica
 def hypergeometric(tn, ns, p):
@@ -66,6 +88,8 @@ def hypergeometric(tn, ns, p):
         tn = tn - 1
     return x
 
+
+
 #Genenador distribucion Poisson
 def poisson(p):
     x = 0
@@ -77,4 +101,41 @@ def poisson(p):
         x += 1
     return x
 
+
+
 #Genenador distribucion Empirica
+
+
+
+
+
+
+#En esta parte del codigo estan las graficas a las distribuciones
+
+def graficar(n,u,e,g):
+    plt.ylabel('')
+    plt.xlabel('')
+    plt.hist(n)
+    plt.title('Normal')
+    plt.show()
+
+    plt.ylabel('')
+    plt.xlabel('')
+    plt.hist(u)
+    plt.title('Uniforme')
+    plt.show()
+
+    plt.ylabel('')
+    plt.xlabel('')
+    plt.hist(e)
+    plt.title('Exponencial')
+    plt.show()
+
+    plt.ylabel('')
+    plt.xlabel('')
+    plt.hist(g)
+    plt.title('Gamma')
+    plt.show()
+
+
+graficar(dist_normal, dist_uniforme, dist_exponencial, dist_gamma);
