@@ -121,7 +121,7 @@ ns = 80
 p = 0.6
 dist_hipergeometrica = []
 
-#Definir parametros de la distribucion Hipergeometrica
+#Definir parametros de la distribucion Poisson
 p = 10
 dist_poisson = []
 
