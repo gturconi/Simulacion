@@ -87,53 +87,53 @@ def poisson(p):
 
 
 #Definir parametros de la distribucion uniforme
-a = 1
-b = 4
+uni_a = 1
+uni_b = 4
 dist_uniforme = []
 
 #Definir parametros de la distribucion exponencial
-ex = 7
+ex_ex = 7
 dist_exponencial = []
 
 #Definir parametros de la distribucion gamma
-k = 10
-alpha = 3
+gamma_k = 10
+gamma_alpha = 3
 dist_gamma = []
 
 #Definir parametros de la distribucion normal
-ex = 2.5
-stdx = 25
+nor_ex = 2.5
+nor_stdx = 25
 dist_normal = []
 
 #Definir parametros de la distribucion pascal
-k = 4
-q = 0.8
+pas_k = 4
+pas_q = 0.8
 dist_pascal = []
 
 #Definir parametros de la distribucion binomial
-n = 100
-p = 0.5
+bin_n = 100
+bin_p = 0.5
 dist_binomial = []
 
 #Definir parametros de la distribucion Hipergeometrica
-tn = 500
-ns = 80
-p = 0.6
+hiper_tn = 500
+hiper_ns = 80
+hiper_p = 0.6
 dist_hipergeometrica = []
 
 #Definir parametros de la distribucion Poisson
-p = 10
+poisson_p = 10
 dist_poisson = []
 
 for i in range(500):
-    dist_uniforme.append(uniform(a, b))
-    dist_exponencial.append(exponential(ex))
-    dist_gamma.append(gamma(k, alpha))
-    dist_normal.append(normal(ex, stdx))
-    dist_pascal.append(pascal(k, q))
-    dist_binomial.append(binomial(n, p))
-    dist_hipergeometrica.append(hypergeometric(tn, ns, p))
-    dist_poisson.append(poisson(p))
+    dist_uniforme.append(uniform(uni_a, uni_b))
+    dist_exponencial.append(exponential(ex_ex))
+    dist_gamma.append(gamma(gamma_k, gamma_alpha))
+    dist_normal.append(normal(nor_ex, nor_stdx))
+    dist_pascal.append(pascal(pas_k, pas_q))
+    dist_binomial.append(binomial(bin_n, bin_p))
+    dist_hipergeometrica.append(hypergeometric(hiper_tn, hiper_ns, hiper_p))
+    dist_poisson.append(poisson(poisson_p))
 
 #En esta parte del codigo estan las graficas a las distribuciones
 
