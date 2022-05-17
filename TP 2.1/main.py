@@ -15,6 +15,15 @@ import math
 import collections
 
 
+
+
+
+
+def normalizar(arr):
+    for x in arr:
+       x = x  / (2 ** 31 - 1)
+    return arr
+
 def frecuencias(arr):
    elements_count = collections.Counter(arr)
    return elements_count
@@ -38,13 +47,11 @@ class Randu:
         for i in range(1, self.n):
             print("Valor", x[i])
             print("Normalizacion", u[i])
-        #testPoker(u)
-        fr = frecuencias(u)
-        fr = [x/25000 for x in [*fr.keys()]]
-        print("Chi square test result: " , chisquare(fr))
-        #testArribaAbajo(u)
+        testPoker(u)
+        chisq_test(u)
+        testArribaAbajo(u)
         #testCorridas(u)
-        #runTest(u)
+        runTest(u)
         #bitmap(np.reshape(u, (500, 500)))
 
 
@@ -67,13 +74,10 @@ class Rand:
             print("Valor", x[i])
             print("Normalizacion", u[i])
         #bitmap(np.reshape(u, (1000, 1000)))
-        fr = frecuencias(u)
-        fr = [x/25000 for x in [*fr.keys()]]
-        print("Chi square test result: " , chisquare(fr))
-        #testPoker(u)
-        #chisq_test(u)
-        #testArribaAbajo(u)
-        #runTest(u)
+        testPoker(u)
+        chisq_test(u)
+        testArribaAbajo(u)
+        runTest(u)
                 #testCorridas(u)
         
 
@@ -104,21 +108,15 @@ class Square:
             print("Semilla", int(seeds[i]))
             print("Numero", float(numbers[i]))
         numbers = np.array(numbers, dtype=np.float32)
-        fr = frecuencias(numbers)
-        fr = [x/25000 for x in [*fr.keys()]]
-        print("Chi square test result: " , chisquare(fr))
-        #testArribaAbajo(numbers)
-        #testPoker(numbers)
-        #chisq_test(numbers)
-        #runTest(numbers)
+        testArribaAbajo(numbers)
+        testPoker(numbers)
+        chisq_test(numbers)
+        runTest(numbers)
         #bitmap(np.reshape(numbers.astype(np.float64), (1000, 1000)))
 
 def randomTest():
     z = np.random.random((1000, 1000))  # Test data
-    runTest(z.flatten())
-    #fr = frecuencias(z.flatten())
-    #fr = [x/25000 for x in [*fr.keys()]]
-    #print("Chi square test result: " , chisquare(fr))
+    testArribaAbajo(z)
     #bitmap(z)
 
 def bitmap(values):
@@ -176,22 +174,22 @@ def pokerSuma(observado, esperado):
   return (((observado - esperado) ** 2) / esperado)
 
 def pokerCaracteres(u):
-	distintos = 0
-	dosIguales = 0
-	tresIguales = 0
-	for i in range(len(u)):
-		c = str(u[i])
-		l = len(c)
-		if(l < 5):
-		   for i in range(l,5):
-		       c = c + '0'
-		if(c[2] != c[3] and c[2] != c[4] and c[3] != c[4]):
-			distintos += 1
-		elif(c[2] == c[3] and c[2] == c[4] and c[3] == c[4]):
-			tresIguales += 1
-		else:
-			dosIguales += 1
-	return distintos,dosIguales,tresIguales
+    distintos = 0
+    dosIguales = 0
+    tresIguales = 0
+    for i in range(len(u)):
+        c = str(u[i])
+        l = len(c)
+        if(l < 5):
+            for i in range(l,5):
+                c = c + '0'
+        if(c[2] != c[3] and c[2] != c[4] and c[3] != c[4]):
+            distintos += 1
+        elif(c[2] == c[3] and c[2] == c[4] and c[3] == c[4]):
+            tresIguales += 1
+        else:
+            dosIguales += 1
+    return distintos,dosIguales,tresIguales
 
 def pokerSuma(observado,esperado):
 	return(((observado-esperado)**2)/esperado)
@@ -238,9 +236,8 @@ def testCorridas(u):
 
 
 if __name__ == "__main__":
-    #rand = Square(500*500,1257787)
-    #rand.mid_square()
-    #randomTest();
+    #rand = Rand(500*500,1257787)
+    #rand.rand()
     #sq = Square(500*500,3708)
     #sq.mid_square()
     #decimalFractions = ""
@@ -250247,15 +250244,16 @@ if __name__ == "__main__":
 
     current_array = arr.split();
     desired_array = [float(numeric_string) for numeric_string in current_array];
+    #desired_array = normalizar(desired_array)
     #bitmap(np.reshape(desired_array, (500, 500)))
-   ## fr = frecuencias(desired_array)
-   ## fr = [x/25000 for x in [*fr.keys()]]
-   ## print("Chi square test result: " , chisquare(fr))
+    fr = frecuencias(desired_array)
+    fr = [x/250000 for x in [*fr.keys()]]
+    print("Chi square test result: " , chisquare(fr))
     #testArribaAbajo(desired_array)
     #testPoker(desired_array)
     #chisq_test(desired_array)
     #testArribaAbajo(desired_array)
-    runTest(desired_array)
+    #runTest(desired_array)
 
 
 
