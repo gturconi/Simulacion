@@ -1,7 +1,10 @@
 import random
 import matplotlib.pyplot as plt
+import scipy
 from numpy.random import random
 from numpy import floor, log as ln, exp
+from scipy.stats import chisquare
+
 
 #En esta parte del codigo estan las distribuciones
 
@@ -188,3 +191,46 @@ def graficar(n, u, e, g, p, b, h, po):
 
 
 graficar(dist_normal, dist_uniforme, dist_exponencial, dist_gamma, dist_pascal, dist_binomial, dist_hipergeometrica, dist_poisson);
+
+def normalizar(list):
+    xmin = min(list)
+    xmax = max(list)
+    for i, x in enumerate(list):
+        list[i] = (x - xmin) / (xmax - xmin)
+    return list
+
+def chisq_test(list):
+    stat, p = chisquare(list)
+    return stat,p
+
+print("Distribucion uniforme:", dist_uniforme)
+print("Distribucion uniforme normalizada:", normalizar(dist_uniforme))
+print("TEST CHI CUADRADO PARA UNIFORME:", chisq_test(normalizar(dist_uniforme)),"\n")
+
+print("Distribucion exponencial:", dist_exponencial)
+print("Distribucion exponencial normalizada:", normalizar(dist_exponencial))
+print("TEST CHI CUADRADO PARA EXPONENCIAL:", chisq_test(normalizar(dist_exponencial)),"\n")
+
+print("Distribucion gamma:", dist_gamma)
+print("Distribucion gamma normalizada:", normalizar(dist_gamma))
+print("TEST CHI CUADRADO PARA GAMMA:", chisq_test(normalizar(dist_gamma)),"\n")
+
+print("Distribucion normal:", dist_normal)
+print("Distribucion normal normalizada:", normalizar(dist_normal))
+print("TEST CHI CUADRADO PARA NORMAL:", chisq_test(normalizar(dist_normal)),"\n")
+
+print("Distribucion pascal:", dist_pascal)
+print("Distribucion pascal normalizada:", normalizar(dist_pascal))
+print("TEST CHI CUADRADO PARA PASCAL:", chisq_test(normalizar(dist_pascal)),"\n")
+
+print("Distribucion binomial:", dist_binomial)
+print("Distribucion binomial normalizada:", normalizar(dist_binomial))
+print("TEST CHI CUADRADO PARA BINOMIAL:", chisq_test(normalizar(dist_binomial)),"\n")
+
+print("Distribucion hipergeometrica:", dist_hipergeometrica)
+print("Distribucion hipergeometrica normalizada:", normalizar(dist_hipergeometrica))
+print("TEST CHI CUADRADO PARA HIPERGEOMETRICA:", chisq_test(normalizar(dist_hipergeometrica)),"\n")
+
+print("Distribucion poisson:", dist_poisson)
+print("Distribucion poisson normalizada:", normalizar(dist_poisson))
+print("TEST CHI CUADRADO PARA POISSON:", chisq_test(normalizar(dist_poisson)),"\n")
