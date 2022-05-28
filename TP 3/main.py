@@ -45,6 +45,7 @@ min_time_next_event= None;
 time_next_event= None;
 num_events= None;
 num_policies = None;
+total_cost = None;
 num_months = 20;
 initial_inv_level = 20
 
@@ -161,20 +162,29 @@ def report(shortage_cost, holding_cost,num_months):
 
 
     #calculamos y escribimos estimaciones de las medidas deseadas de rendimiento
+    avg_ordering_cost = total_ordering_cost / time_next_event[2]
+    avg_holding_cost = holding_cost * area_holding / time_next_event[2]
+    avg_shortage_cost = shortage_cost * area_shortage / time_next_event[2]
+    total_cost = avg_ordering_cost + avg_holding_cost + avg_shortage_cost
+    #avg_ordering_cost = total_ordering_cost / num_months
+    #avg_holding_cost = holding_cost * area_holding / num_months
+    #avg_shortage_cost = shortage_cost * area_shortage / num_months
 
-    avg_ordering_cost = total_ordering_cost / num_months
-    avg_holding_cost = holding_cost * area_holding / num_months
-    avg_shortage_cost = shortage_cost * area_shortage / num_months
+    print("Costo promedio de orden: ", avg_ordering_cost)
+    print("Costo promedio de mantenimiento: ", avg_holding_cost)
+    print("Costo promedio de faltantes: ", avg_shortage_cost)
+    print("Costo total: ", total_cost)
 
-    print("Promedio de clientes en el sistema: ", total_of_delays / num_custs_delayed)
+    # A estos me parece que no los pide
+    #print("Promedio de clientes en el sistema: ", total_of_delays / num_custs_delayed)
 
-    print("Promedio de clientes en cola: ", area_num_in_q / sim_time)
+    #print("Promedio de clientes en cola: ", area_num_in_q / sim_time)
 
-    print("Tiempo Promedio en el sistema: ", area_server_status / num_delays_required)
+    #print("Tiempo Promedio en el sistema: ", area_server_status / num_delays_required)
 
-    print("N�mero de retrasos completados: ", num_custs_delayed)
+    #print("N�mero de retrasos completados: ", num_custs_delayed)
 
-    print("Utilizacion del servidor: ", area_server_status / sim_time)
+    #print("Utilizacion del servidor: ", area_server_status / sim_time)
 
 
 def update_time_avg_stats():
@@ -192,7 +202,8 @@ def update_time_avg_stats():
     time_last_event = sim_time
 
     if(inv_level < 0):
-        area_shortage -= inv_level * time_since_last_event
+        area_shortage += (inv_level * time_since_last_event)*(-1)
+        #area_shortage -= inv_level * time_since_last_event me parece que se deberia sumar en vez de restar
     elif(inv_level > 0 ):
         area_holding += inv_level * time_since_last_event
 
@@ -213,6 +224,8 @@ def timing():
     sim_time=min_time_next_event
     if(min_time_next_event == time_next_event[3]):
         time_next_event[3] +=1;
+    if(time_next_event[3] == time_next_event[2]):
+        next_event_type = 3
 
 
 
@@ -247,8 +260,8 @@ if __name__ == "__main__":
             elif (next_event_type == 4):
                 evaluate(4) #Evaluacion de inventario
                 print("Evaluacion de inventario")
-            #elif (next_event_type == 3):
-               # report(2,2,2)
+            elif (next_event_type == 3):
+                report(2,2,2)
             #repetir_bucle = (next_event_type <= 3)
             repetir_bucle = time_next_event[3] < time_next_event[2]
 
