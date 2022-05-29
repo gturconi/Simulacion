@@ -27,12 +27,15 @@ maxlag = None;
 
 avg_holding_cost= None;
 avg_holding_cost_array= [];
+avg_holding_cost_array_total= [];
 
 avg_ordering_cost= None;
 avg_ordering_cost_array = []
+avg_ordering_cost_array_total = []
 
 avg_shortage_cost= None;
 avg_shortage_cost_array = []
+avg_shortage_cost_array_total = []
 
 total_cost = None;
 total_cost_array = []
@@ -55,7 +58,7 @@ min_time_next_event= None;
 time_next_event= None;
 num_events= None;
 num_policies = None;
-num_months = 20;
+num_months = 1000;
 initial_inv_level = 20
 
 
@@ -65,6 +68,12 @@ def graficar(list1, msg1, msg2):
     plt.ylabel(msg2)
     plt.show()
 
+def graficarCorridas(list1,msg1,msg2):
+  plt.xlabel(msg1)
+  plt.ylabel(msg2)
+  for i in range(len(list1)):
+      plt.plot(list1[i])
+  plt.show()
 
 
 
@@ -77,6 +86,10 @@ def inicialize(mean_interdemand):
     global area_shortage
     global time_next_event  #
     global num_months
+    global avg_holding_cost_array
+    global avg_shortage_cost_array
+    global avg_ordering_cost_array
+    global total_cost_array
 
     sim_time = 0
 
@@ -101,6 +114,14 @@ def inicialize(mean_interdemand):
     time_next_event[1] = float(sim_time + numpy.random.exponential(mean_interdemand))
     time_next_event[2] = num_months
     time_next_event[3] = 1
+
+    #Otras inicializaciones
+
+    avg_holding_cost_array = []
+    avg_ordering_cost_array = []
+    avg_shortage_cost_array = []
+    total_cost_array = []
+
 
     #Me parece que no es la forma correcta de hacerlo, ademas no esta inicializado como tupla
     #time_next_event.insert(0, math.inf) #Arribo del prox pedido
@@ -198,9 +219,7 @@ def report(shortage_cost,num_months):
     print("Costo promedio de faltantes: ", avg_shortage_cost)
     print("Costo total: ", total_cost)
 
-    graficar(avg_ordering_cost_array, "Tiempo(meses)", "Costo de orden")
-    graficar(avg_shortage_cost_array, "Tiempo(meses)", "Costo de faltantes")
-    graficar(avg_holding_cost_array, "Tiempo(meses)", "Costo de almacenamiento")
+
 
     # A estos me parece que no los pide
     #print("Promedio de clientes en el sistema: ", total_of_delays / num_custs_delayed)
@@ -239,9 +258,12 @@ def update_time_avg_stats():
         #area_shortage -= inv_level * time_since_last_event me parece que se deberia sumar en vez de restar
     elif(inv_level > 0 ):
         area_holding += inv_level * time_since_last_event
+
     avg_shortage_cost_array.append(shortage_cost * area_shortage / time_next_event[3])
     avg_holding_cost_array.append(holding_cost * area_holding / time_next_event[3])
     avg_ordering_cost_array.append(total_ordering_cost / time_next_event[3])
+
+
 
 def timing():
     global min_time_next_event
@@ -274,11 +296,11 @@ def inputValues():
 
 if __name__ == "__main__":
     repetir_bucle = True;
-    num_policies = 1 #Supongo que debe ser el numero de simulaciones
+    num_policies = 10 #Supongo que debe ser el numero de simulaciones
     num_events = 4 #esto qué hace? Encima nunca se usa jaja
     D = [1/6,1/3,1/3,1/6]
     for i in range(num_policies):
-        inputValues()
+      #  inputValues()
         inicialize(0.5)
         repetir_bucle = True
         while repetir_bucle:
@@ -300,5 +322,17 @@ if __name__ == "__main__":
                 report(2,2)
             #repetir_bucle = (next_event_type <= 3)
             repetir_bucle = time_next_event[3] < time_next_event[2]
+            # Almacenamos los estadisticos de cada iteracion
+        if(i==1):
+            graficar(avg_ordering_cost_array, "Tiempo(meses)", "Costo de orden")
+            graficar(avg_shortage_cost_array, "Tiempo(meses)", "Costo de faltantes")
+            graficar(avg_holding_cost_array, "Tiempo(meses)", "Costo de almacenamiento")
+        avg_shortage_cost_array_total.append(avg_shortage_cost_array)
+        avg_holding_cost_array_total.append(avg_holding_cost_array)
+        avg_ordering_cost_array_total.append(avg_ordering_cost_array)
+    graficarCorridas(avg_ordering_cost_array_total, "Tiempo(meses)", "Costo de orden de cada corrida")
+    graficarCorridas(avg_shortage_cost_array_total,"Tiempo(meses)", "Costo de faltantes de cada corrida")
+    graficarCorridas(avg_holding_cost_array_total, "Tiempo(meses)", "Costo de almacenamiento de cada corrida")
+
 
 
