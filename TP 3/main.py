@@ -24,11 +24,21 @@ setup_cost = 2;
 incremental_cost = None;
 minlag = None;
 maxlag = None;
+
 avg_holding_cost= None;
+avg_holding_cost_array= [];
+
 avg_ordering_cost= None;
+avg_ordering_cost_array = []
+
 avg_shortage_cost= None;
-holding_cost = None;
-shortage_cost = None;
+avg_shortage_cost_array = []
+
+total_cost = None;
+total_cost_array = []
+
+holding_cost = 2;
+shortage_cost = 2;
 num_delays_required = None;
 num_custs_delayed = None;
 total_of_delays = None;
@@ -45,11 +55,20 @@ min_time_next_event= None;
 time_next_event= None;
 num_events= None;
 num_policies = None;
-total_cost = None;
 num_months = 20;
 initial_inv_level = 20
 
-def inicialize(mean_interdemand,num_months):
+
+def graficar(list1, msg1, msg2):
+    plt.plot(list1)
+    plt.xlabel(msg1)
+    plt.ylabel(msg2)
+    plt.show()
+
+
+
+
+def inicialize(mean_interdemand):
     global sim_time
     global inv_level
     global time_last_event
@@ -57,6 +76,7 @@ def inicialize(mean_interdemand,num_months):
     global area_holding
     global area_shortage
     global time_next_event  #
+    global num_months
 
     sim_time = 0
 
@@ -145,6 +165,8 @@ def evaluate(fixed_cost):
         amount = bigs - inv_level
         #total_ordering_cost += setup_cost + incremental_cost + amount esta linea no se entiende lo que quiere hacer
         total_ordering_cost += amount * setup_cost + fixed_cost
+        #avg_ordering_cost_array.append(total_ordering_cost / time_next_event[3])
+
         time_next_event[0] = float(sim_time + 0.5 + (1-0.5)*random.uniform(0, 1)) #Formula que vimos en clase
         #time_next_event.insert(0, sim_time + random.uniform(minlag, maxlag))
         time_next_event[3] += 1
@@ -152,13 +174,14 @@ def evaluate(fixed_cost):
 
     #time_next_event.insert(3, sim_time + 1)
 
-def report(shortage_cost, holding_cost,num_months):
+def report(shortage_cost,num_months):
     global avg_holding_cost
     global avg_ordering_cost
     global avg_shortage_cost
     global num_delays_required  #
     global num_custs_delayed  #
     global total_of_delays  #
+    global holding_cost
 
 
     #calculamos y escribimos estimaciones de las medidas deseadas de rendimiento
@@ -174,6 +197,10 @@ def report(shortage_cost, holding_cost,num_months):
     print("Costo promedio de mantenimiento: ", avg_holding_cost)
     print("Costo promedio de faltantes: ", avg_shortage_cost)
     print("Costo total: ", total_cost)
+
+    graficar(avg_ordering_cost_array, "Tiempo(meses)", "Costo de orden")
+    graficar(avg_shortage_cost_array, "Tiempo(meses)", "Costo de faltantes")
+    graficar(avg_holding_cost_array, "Tiempo(meses)", "Costo de almacenamiento")
 
     # A estos me parece que no los pide
     #print("Promedio de clientes en el sistema: ", total_of_delays / num_custs_delayed)
@@ -196,6 +223,12 @@ def update_time_avg_stats():
     global time_last_event  #
     global area_holding
     global area_shortage
+    global sim_time
+    global inv_level
+    global time_next_event
+    global holding_cost
+    global shortage_cost
+    global total_ordering_cost
 
     #calculamos el tiempo desde el ultimo evento y actualizamos el marcador de tiempo del ultimo evento
     time_since_last_event = sim_time - time_last_event
@@ -206,6 +239,9 @@ def update_time_avg_stats():
         #area_shortage -= inv_level * time_since_last_event me parece que se deberia sumar en vez de restar
     elif(inv_level > 0 ):
         area_holding += inv_level * time_since_last_event
+    avg_shortage_cost_array.append(shortage_cost * area_shortage / time_next_event[3])
+    avg_holding_cost_array.append(holding_cost * area_holding / time_next_event[3])
+    avg_ordering_cost_array.append(total_ordering_cost / time_next_event[3])
 
 def timing():
     global min_time_next_event
@@ -214,6 +250,7 @@ def timing():
     global min_time_next_event
     global time_next_event
     global num_events
+
 
     min_time_next_event=1*10**(29)
     next_event_type=0
@@ -237,13 +274,12 @@ def inputValues():
 
 if __name__ == "__main__":
     repetir_bucle = True;
-
     num_policies = 1 #Supongo que debe ser el numero de simulaciones
     num_events = 4 #esto qué hace? Encima nunca se usa jaja
     D = [1/6,1/3,1/3,1/6]
     for i in range(num_policies):
         inputValues()
-        inicialize(0.5,120)
+        inicialize(0.5)
         repetir_bucle = True
         while repetir_bucle:
             # Determinamos el siguiente evento
@@ -261,7 +297,7 @@ if __name__ == "__main__":
                 evaluate(4) #Evaluacion de inventario
                 print("Evaluacion de inventario")
             elif (next_event_type == 3):
-                report(2,2,2)
+                report(2,2)
             #repetir_bucle = (next_event_type <= 3)
             repetir_bucle = time_next_event[3] < time_next_event[2]
 
