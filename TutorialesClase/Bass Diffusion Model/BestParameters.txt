@@ -1,0 +1,5 @@
+TotalPopulation	100,000
+ContactRate	100
+ProductLifeTime	2
+MonthlyExpenditures	2,342.432
+SwitchTime	0.167
