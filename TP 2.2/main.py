@@ -270,6 +270,7 @@ for j in range(10):
     empirica_gen = np.random.normal(0,1,100)
     normalized_empirica = dist_empirica/np.linalg.norm(dist_empirica)
     stats,p =kstest(empirica_gen,normalized_empirica)
-    print(p)
+    print(dist_empirica)
+    
 
 
